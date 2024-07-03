@@ -5,6 +5,7 @@ import View.utils.View;
 import View.utils.ViewUtils;
 import utilsGeneral.MessageCallBackToView;
 import java.util.Dictionary;
+import java.util.List;
 
 public class CLI implements View{
     private Character[][] board;
@@ -30,9 +31,12 @@ public class CLI implements View{
 
             @Override
             public void ShowBattleInfo(Dictionary<String, String> battleInfo, Dictionary<String, String> battleInfo2, int attacker, int defender) {
-                battleInfo(battleInfo, battleInfo2);
+                battleInfo(battleInfo, battleInfo2, attacker, defender);
             }
-
+            @Override
+            public void initiateGame(List<Dictionary<String, String>> availablePlayers){
+                InitiateGame(availablePlayers);
+            }
             @Override
             public void ShowPlayerStats(Dictionary<String, String> playerStats) {
                 playerStats(playerStats);
@@ -45,7 +49,15 @@ public class CLI implements View{
     public MessageCallBackToView getMessageCallBack(){
         return this.messageCallBackToView;
     }
-
+    private void InitiateGame(List<Dictionary<String, String>> availablePlayers){
+        String toPrint = "";
+        int i = 1;
+        for(Dictionary<String, String> player : availablePlayers){
+            toPrint = toPrint + i + ". "+ ViewUtils.CreatePlayerString(player) + "\n";
+        }
+        System.out.println(toPrint);
+        messageCallBackToController.nextTick(true);
+    }
     private void updateTile(char c, int x, int y){
         board[y][x] = c;
     }
@@ -53,11 +65,11 @@ public class CLI implements View{
         board = new Character[height][width];
     }
 
-    private void battleInfo(Dictionary<String, String> battleInfo1, Dictionary<String, String> battleInfo2 ){
+    private void battleInfo(Dictionary<String, String> battleInfo1, Dictionary<String, String> battleInfo2, int attacker, int defender ){
         if(battleString == null){
             battleString = "";
         }
-        battleString += ViewUtils.CreateBattleString(battleInfo1, battleInfo2);
+        battleString += ViewUtils.CreateBattleString(battleInfo1, battleInfo2, attacker, defender);
     }
 
     private void playerStats(Dictionary<String, String> playerStats){
@@ -72,7 +84,9 @@ public class CLI implements View{
         String boardString = ViewUtils.CreateBoardString(board);
         String toPrint = battleString +"/n" + boardString + "/n" + playerString;
         System.out.println(toPrint);
-        messageCallBackToController.nextTick();
+        battleString = "";
+        playerString = "";
+        messageCallBackToController.nextTick(false);
     }
 
 
