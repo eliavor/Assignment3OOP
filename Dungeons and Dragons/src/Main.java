@@ -10,9 +10,9 @@ public class Main {
         }
         else{
             Controller controller = new Controller();
-            CLI cli = new CLI(controller.getNessageCallback());
+            CLI cli = new CLI(controller.getMessageCallback());
             Board b = new Board(args[0], cli.getMessageCallBack());
-
+            controller.setB(b);
         }
 
     }
