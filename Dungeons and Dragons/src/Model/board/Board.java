@@ -50,4 +50,8 @@ public class Board {
             }
         }
     }
+
+    public void handleUserInput(char c) {
+
+    }
 }

@@ -29,8 +29,8 @@ public class CLI implements View{
             }
 
             @Override
-            public void ShowBattleInfo(Dictionary<String, String> battleInfo) {
-                battleInfo(battleInfo);
+            public void ShowBattleInfo(Dictionary<String, String> battleInfo, Dictionary<String, String> battleInfo2) {
+                battleInfo(battleInfo, battleInfo2);
             }
 
             @Override
