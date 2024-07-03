@@ -16,4 +16,7 @@ public class Wall extends Tile{
         unit.visit(this);
 
     }
+    public void interact(int i, int i1, Tile[][] board) {
+        //do nothing
+    }
 }

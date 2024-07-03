@@ -7,8 +7,8 @@ import utilsGeneral.MessageCallBackToView;
 public class Enemy extends Unit {
 
     protected int experienceValue;
-    public Enemy(String name, char symbol, int health , int attack, int defense, int experienceValue, MessageCallBackToView messageCallBackToView) {
-        super(symbol, name, health, attack, defense, messageCallBackToView);
+    public Enemy(int x, int y, String name, char symbol, int health , int attack, int defense, int experienceValue, MessageCallBackToView messageCallBackToView) {
+        super(x, y, symbol, name, health, attack, defense, messageCallBackToView);
         this.experienceValue = experienceValue;
     }
 
@@ -34,5 +34,9 @@ public class Enemy extends Unit {
 
     public void visit(Enemy enemy){
         //DO NOTHING
+    }
+
+    public void Move(){
+
     }
 }

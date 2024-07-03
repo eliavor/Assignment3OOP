@@ -22,10 +22,11 @@ public abstract class Unit extends Tile {
     protected MessageCallBackToView messageCallBackToView;
 
 
-    public Unit(char symbol, String name,int maxHealth, int attack, int defense, MessageCallBackToView messageCallBackToView) {
+    public Unit(int x, int y, char symbol, String name,int maxHealth, int attack, int defense, MessageCallBackToView messageCallBackToView) {
         super(symbol);
 
         this.name = name;
+        position = new Position(x, y);
         this.health = new Health(maxHealth);
         this.attack = attack;
         this.defense = defense;
@@ -59,6 +60,10 @@ public abstract class Unit extends Tile {
 
     public void interact(Tile tile) {
         tile.accept(this);
+    }
+
+    public void interact(int i, int i1, Tile[][] board) {
+        //do nothing
     }
 
     public void visit(Empty e){

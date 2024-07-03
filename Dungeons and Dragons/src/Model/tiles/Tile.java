@@ -5,7 +5,7 @@ import Model.utils.Position;
 
 public abstract class Tile {
 
-    protected Position position;
+    public Position position;
     protected char symbol;
 
     public Tile(char symbol) {
@@ -29,5 +29,7 @@ public abstract class Tile {
         tile.position = temp;
     }
 
+
+    public abstract void interact(Tile tile);
 
 }

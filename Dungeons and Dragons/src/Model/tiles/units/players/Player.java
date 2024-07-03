@@ -2,6 +2,7 @@ package Model.tiles.units.players;
 
 import Model.tiles.units.Unit;
 import Model.tiles.units.enenies.Enemy;
+import utilsGeneral.MessageCallBackToView;
 
 public class Player extends Unit {
 
@@ -16,8 +17,8 @@ public class Player extends Unit {
 
     protected int experience;
 
-    public Player(String name, int hitPoint, int attack, int defense) {
-        super(SYMBOL, name, hitPoint, attack, defense);
+    public Player(int x, int y, String name, int health, int attack, int defense, MessageCallBackToView messageCallBackToView) {
+        super(x, y, SYMBOL, name, health, attack, defense, messageCallBackToView);
         level = 1;
         experience = 0;
     }
@@ -77,7 +78,7 @@ public class Player extends Unit {
 
     @Override
     public void onDeath() {
-        //TODO: implement onDeath
+        messageCallBackToView.UpdateTile('.', position.getX(), position.getY());
     }
 
 }
