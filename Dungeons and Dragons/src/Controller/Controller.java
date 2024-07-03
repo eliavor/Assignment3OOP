@@ -33,7 +33,7 @@ public class Controller {
         while (userInput.length() != 1 || userInput.charAt(0) >'8' || userInput.charAt(0) < '1'){
             userInput = sc.nextLine();
         }
-        b.StartGame(userInput.charAt(0) - '0');
+        b.startGame(userInput.charAt(0) - '0');
     }
 
     private void handleUserInput(){
