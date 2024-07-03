@@ -13,6 +13,7 @@ public class Main {
             CLI cli = new CLI(controller.getMessageCallback());
             Board b = new Board(args[0], cli.getMessageCallBack());
             controller.setB(b);
+            b.presentPlayerInfo();
         }
 
     }
