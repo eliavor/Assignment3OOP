@@ -1,26 +1,26 @@
 package View.commendLineView;
 
-import utilsGeneral.MessageCallBack;
+import utilsGeneral.MessageCallBackViewController;
 import View.utils.View;
 
 public class CLI implements View{
 
-    private MessageCallBack messageCallBack;
-    private MessageCallBack messageCallBackfromController;
+    private MessageCallBackViewController messageCallBackViewController;
+    private MessageCallBackViewController messageCallBackfromControllerViewController;
 
-    public CLI(MessageCallBack messageCallBackfromController){
-        messageCallBack = new MessageCallBack() {
+    public CLI(MessageCallBackViewController messageCallBackfromControllerViewController){
+        messageCallBackViewController = new MessageCallBackViewController() {
             @Override
-            public void sendMessage(String message) {
+            public void nextTick() {
                 //TODO: Implement
             }
         };
-        this.messageCallBackfromController = messageCallBackfromController;
+        this.messageCallBackfromControllerViewController = messageCallBackfromControllerViewController;
     }
 
 
-    public MessageCallBack getMessageCallBack(){
-        return this.messageCallBack;
+    public MessageCallBackViewController getMessageCallBack(){
+        return this.messageCallBackViewController;
     }
 
 }
