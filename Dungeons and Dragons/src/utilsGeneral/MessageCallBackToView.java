@@ -8,7 +8,7 @@ public interface MessageCallBackToView {
 
     public void LoadMap(int width, int height);
 
-    public void ShowBattleInfo(Dictionary<String, String> battleInfo, Dictionary<String, String> battleInfo2);
+    public void ShowBattleInfo(Dictionary<String, String> battleInfo, Dictionary<String, String> battleInfo2, int attacker , int defender);
 
     public void ShowPlayerStats(Dictionary<String, String> playerStats);
 }
