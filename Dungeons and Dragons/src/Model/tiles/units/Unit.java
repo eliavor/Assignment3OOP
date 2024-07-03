@@ -8,6 +8,7 @@ import Model.tiles.units.players.Player;
 import Model.utils.Health;
 import Model.utils.Position;
 import Model.utils.generators.Generator;
+import utilsGeneral.MessageCallBackToView;
 
 public abstract class Unit extends Tile {
 
@@ -18,14 +19,18 @@ public abstract class Unit extends Tile {
 
     protected Generator generator;
 
+    protected MessageCallBackToView messageCallBackToView;
 
-    public Unit(char symbol, String name, int hitPoint, int attack, int defense) {
+
+    public Unit(char symbol, String name,int maxHealth, int attack, int defense, MessageCallBackToView messageCallBackToView) {
         super(symbol);
 
         this.name = name;
-        this.health = new Health(hitPoint);
+        this.health = new Health(maxHealth);
         this.attack = attack;
         this.defense = defense;
+        this.messageCallBackToView = messageCallBackToView;
+        messageCallBackToView.UpdateTile(this.symbol, this.position.getX(), this.position.getY() );
     }
 
     public void initialize(Position p ,Generator generator) {

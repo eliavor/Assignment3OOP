@@ -2,17 +2,18 @@ package Model.tiles.units.enenies;
 
 import Model.tiles.units.Unit;
 import Model.tiles.units.players.Player;
+import utilsGeneral.MessageCallBackToView;
 
 public class Enemy extends Unit {
 
-    protected int experienceVlaue;
-    public Enemy(char symbol, String name, int hitPoint, int attack, int defense, int experienceVlaue) {
-        super(symbol, name, hitPoint, attack, defense);
-        this.experienceVlaue = experienceVlaue;
+    protected int experienceValue;
+    public Enemy(String name, char symbol, int health , int attack, int defense, int experienceValue, MessageCallBackToView messageCallBackToView) {
+        super(symbol, name, health, attack, defense, messageCallBackToView);
+        this.experienceValue = experienceValue;
     }
 
     public int getExperience(){
-        return experienceVlaue;
+        return experienceValue;
     }
 
     public void onDeath(){
