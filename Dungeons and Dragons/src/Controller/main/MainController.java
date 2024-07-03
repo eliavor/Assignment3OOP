@@ -23,4 +23,9 @@ public class MainController {
         Display = new CLI(messageCallBackToView);
     }
 
+
+    public MessageCallBack getMessageCallBack(){
+        return this.messageCallBackToView;
+    }
+
 }
