@@ -1,6 +1,6 @@
 package utilsGeneral;
 
-public interface MessageCallBackViewController {
+public interface MessageCallBackToController {
 
     public void nextTick();
 }

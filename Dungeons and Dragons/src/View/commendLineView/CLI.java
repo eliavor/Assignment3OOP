@@ -1,26 +1,63 @@
 package View.commendLineView;
 
-import utilsGeneral.MessageCallBackViewController;
+import utilsGeneral.MessageCallBackToController;
 import View.utils.View;
+import utilsGeneral.MessageCallBackToView;
+
+import java.util.Dictionary;
 
 public class CLI implements View{
 
-    private MessageCallBackViewController messageCallBackViewController;
-    private MessageCallBackViewController messageCallBackfromControllerViewController;
+    private  MessageCallBackToView messageCallBackToView;
 
-    public CLI(MessageCallBackViewController messageCallBackfromControllerViewController){
-        messageCallBackViewController = new MessageCallBackViewController() {
+    private MessageCallBackToController messageCallBackToController;
+
+    public CLI(MessageCallBackToController messageCallBackToController){
+
+        messageCallBackToView = new MessageCallBackToView() {
+
             @Override
-            public void nextTick() {
-                //TODO: Implement
+            public void UpdateTile(char symbol, int x, int y) {
+                updateTile(symbol, x, y);
+            }
+
+            @Override
+            public void LoadMap(int width, int height) {
+                loadMap(width, height);
+            }
+
+            @Override
+            public void ShowBattleInfo(Dictionary<String, String> battleInfo) {
+                battleInfo(battleInfo);
+            }
+
+            @Override
+            public void ShowPlayerStats(Dictionary<String, String> playerStats) {
+                playerStats(playerStats);
             }
         };
-        this.messageCallBackfromControllerViewController = messageCallBackfromControllerViewController;
+
     }
 
-
-    public MessageCallBackViewController getMessageCallBack(){
-        return this.messageCallBackViewController;
+    @Override
+    public MessageCallBackToView getMessageCallBack(){
+        return this.messageCallBackToView;
     }
+
+    private void updateTile(char c, int x, int y){
+
+    }
+    private void loadMap(int width, int height){
+
+    }
+
+    private void battleInfo(Dictionary<String, String> battleInfo){
+
+    }
+
+    private void playerStats(Dictionary<String, String> playerStats){
+
+    }
+
 
 }

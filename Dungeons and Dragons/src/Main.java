@@ -1,7 +1,6 @@
 import Controller.Controller;
 import View.commendLineView.CLI;
-import View.utils.View;
-import Model.board.board;
+import Model.board.Board;
 
 public class Main {
 
@@ -12,7 +11,7 @@ public class Main {
         else{
             Controller controller = new Controller();
             CLI cli = new CLI(controller.getNessageCallback());
-            board b = new board(args[0], cli.getMessageCallBack());
+            Board b = new Board(args[0], cli.getMessageCallBack());
 
         }
 

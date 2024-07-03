@@ -1,8 +1,9 @@
 package View.utils;
 
-import utilsGeneral.MessageCallBackViewController;
+import utilsGeneral.MessageCallBackToController;
+import utilsGeneral.MessageCallBackToView;
 
 public interface View {
 
-    public MessageCallBackViewController getMessageCallBack();
+    public MessageCallBackToView getMessageCallBack();
 }
