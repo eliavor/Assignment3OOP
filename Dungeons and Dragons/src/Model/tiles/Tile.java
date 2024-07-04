@@ -40,8 +40,8 @@ public abstract class Tile {
         tile.symbol = '@';
 
 
-        messageCallBackToView.UpdateTile('.', this.position.getX(), this.position.getY());
-        messageCallBackToView.UpdateTile('@', tile.position.getX(), tile.position.getY());
+        messageCallBackToView.UpdateTile('@', this.position.getX(), this.position.getY());
+        messageCallBackToView.UpdateTile('.', tile.position.getX(), tile.position.getY());
     }
 
 

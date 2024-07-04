@@ -41,10 +41,6 @@ public class Board {
 
     }
 
-    public void presentPlayerInfo(){
-
-    }
-
     public void InitializeBoard() {
         String[] rows = content.split("\r\n");
         int height = rows.length;
