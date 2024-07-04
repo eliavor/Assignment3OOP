@@ -2,6 +2,7 @@ package Model.board;
 
 import Model.tiles.units.enemies.Enemy;
 import Model.tiles.units.players.Player;
+import Model.utils.Position;
 import Model.utils.TileFactory;
 import utilsGeneral.MessageCallBackToView;
 import java.io.IOException;
@@ -115,7 +116,13 @@ public class Board {
 
     public void enemiesTick(){
         for(Enemy enemy : enemies){
-            enemy.OnEnemyTurn(player);
+            Position dest = enemy.OnEnemyTurn(player);
+            if(dest != null) {
+                Tile toInteract = searchPosition(dest.getY(), dest.getX());
+                if (toInteract != null) {
+                    enemy.interact(toInteract);
+                }
+            }
         }
     }
 
