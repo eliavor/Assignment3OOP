@@ -35,7 +35,6 @@ public abstract class Tile {
         this.position = tile.position;
         tile.position = temp;
 
-
         symbol = '.';
         tile.symbol = '@';
 

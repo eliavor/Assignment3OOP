@@ -72,22 +72,33 @@ public class Board {
         messageCallBackToView.ShowPlayerStats(TileFactory.players.get(playerChoice));
     }
 
+    private Tile searchPosition(int y, int x){
+        for(int i  = 0; i < board[0].length; i++){
+            for(int j = 0; j < board.length; j++){
+                if(board[j][i].position.getX() == x && board[j][i].position.getY() == y){
+                    return board[j][i];
+                }
+            }
+        }
+        return null;
+    }
+
     public void handleUserInput(char c) {
         int playerX = player.position.getX();
         int playerY = player.position.getY();
         switch (c) {
 
             case 'w':
-                player.interact(board[playerY - 1][playerX]);
+                player.interact(searchPosition(playerY - 1,playerX));
                 break;
             case 'a':
-                player.interact(board[playerY][playerX - 1]);
+                player.interact(searchPosition(playerY, playerX - 1));
                 break;
             case 's':
-                player.interact(board[playerY + 1][playerX]);
+                player.interact(searchPosition(playerY + 1,playerX));
                 break;
             case 'd':
-                player.interact(board[playerY][playerX + 1]);
+                player.interact(searchPosition(playerY, playerX + 1));
                 break;
             case 'e':
                 player.specialAbility();
