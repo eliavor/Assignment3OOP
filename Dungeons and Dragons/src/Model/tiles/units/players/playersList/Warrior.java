@@ -12,5 +12,6 @@ public class Warrior extends Player {
         super(x, y, name, health, attack, defense, messageCallBackToView);
         this.abilityCoolDown = cooldown;
     }
+    
 
 }
