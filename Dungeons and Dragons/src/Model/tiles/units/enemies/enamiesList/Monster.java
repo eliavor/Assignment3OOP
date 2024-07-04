@@ -1,8 +1,9 @@
-package Model.tiles.units.enemies;
+package Model.tiles.units.enemies.enamiesList;
 
+import Model.tiles.units.enemies.Enemy;
 import utilsGeneral.MessageCallBackToView;
 
-public class Monster extends Enemy{
+public class Monster extends Enemy {
 
     private int visionRange;
 

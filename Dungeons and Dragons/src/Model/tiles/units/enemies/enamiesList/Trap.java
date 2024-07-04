@@ -1,8 +1,9 @@
-package Model.tiles.units.enemies;
+package Model.tiles.units.enemies.enamiesList;
 
+import Model.tiles.units.enemies.Enemy;
 import utilsGeneral.MessageCallBackToView;
 
-public class Trap extends Enemy{
+public class Trap extends Enemy {
 
     private int visibilityTime;
     private int invisibilityTime;

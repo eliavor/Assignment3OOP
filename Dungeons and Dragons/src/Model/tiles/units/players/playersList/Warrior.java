@@ -1,8 +1,9 @@
-package Model.tiles.units.players;
+package Model.tiles.units.players.playersList;
 
+import Model.tiles.units.players.Player;
 import utilsGeneral.MessageCallBackToView;
 
-public class Warrior extends Player{
+public class Warrior extends Player {
 
     private int abilityCoolDown;
     private int remainingCoolDown;

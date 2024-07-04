@@ -1,8 +1,9 @@
-package Model.tiles.units.players;
+package Model.tiles.units.players.playersList;
 
+import Model.tiles.units.players.Player;
 import utilsGeneral.MessageCallBackToView;
 
-public class Mage extends Player{
+public class Mage extends Player {
 
 
     private int manaPool;

@@ -1,8 +1,9 @@
-package Model.tiles.units.players;
+package Model.tiles.units.players.playersList;
 
+import Model.tiles.units.players.Player;
 import utilsGeneral.MessageCallBackToView;
 
-public class Rogue extends Player{
+public class Rogue extends Player {
 
     int cost;
     int currentEnergy;

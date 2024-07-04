@@ -90,7 +90,7 @@ public class Board {
                 player.interact(board[playerY][playerX + 1]);
                 break;
             case 'e':
-                player.specialAbility();
+                player.OnAbilityCast();
                 break;
             case 'q':
                 enemiesTick();
@@ -104,7 +104,7 @@ public class Board {
 
     public void enemiesTick(){
         for(Enemy enemy : enemies){
-            enemy.Move();
+            enemy.OnEnemyTurn();
         }
     }
 

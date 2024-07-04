@@ -81,7 +81,15 @@ public class Player extends Unit {
         messageCallBackToView.UpdateTile('.', position.getX(), position.getY());
     }
 
-    public void specialAbility(){
+    public void OnAbilityCast(){
+        //DO NOTHING - to be overridden by subclasses
+    }
+
+    public void UponLevelUp(){
+        //DO NOTHING - to be overridden by subclasses
+    }
+
+    public void OnGameTick(){
         //DO NOTHING - to be overridden by subclasses
     }
 

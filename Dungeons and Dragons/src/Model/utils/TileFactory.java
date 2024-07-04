@@ -3,12 +3,12 @@ package Model.utils;
 import Model.tiles.Empty;
 import Model.tiles.Tile;
 import Model.tiles.Wall;
-import Model.tiles.units.enemies.Monster;
-import Model.tiles.units.enemies.Trap;
-import Model.tiles.units.players.Mage;
+import Model.tiles.units.enemies.enamiesList.Monster;
+import Model.tiles.units.enemies.enamiesList.Trap;
+import Model.tiles.units.players.playersList.Mage;
 import Model.tiles.units.players.Player;
-import Model.tiles.units.players.Rogue;
-import Model.tiles.units.players.Warrior;
+import Model.tiles.units.players.playersList.Rogue;
+import Model.tiles.units.players.playersList.Warrior;
 import utilsGeneral.MessageCallBackToView;
 
 

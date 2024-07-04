@@ -36,7 +36,7 @@ public class Enemy extends Unit {
         //DO NOTHING
     }
 
-    public void Move(){
+    public void OnEnemyTurn(){
 
     }
 }
