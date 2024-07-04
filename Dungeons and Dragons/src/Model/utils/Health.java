@@ -22,6 +22,7 @@ public class Health {
     public int getCurrent() {
         return current;
     }
+    public int getCapacity() {return capacity;}
 
     public int getCapacity() {
         return capacity;

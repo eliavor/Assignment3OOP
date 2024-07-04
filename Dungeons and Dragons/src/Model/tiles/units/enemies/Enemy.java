@@ -2,9 +2,10 @@ package Model.tiles.units.enemies;
 
 import Model.tiles.units.Unit;
 import Model.tiles.units.players.Player;
+import Model.utils.Position;
 import utilsGeneral.MessageCallBackToView;
 
-public class Enemy extends Unit {
+public abstract class Enemy extends Unit {
 
     protected int experienceValue;
     public Enemy(int x, int y, String name, char symbol, int health , int attack, int defense, int experienceValue, MessageCallBackToView messageCallBackToView) {
@@ -17,7 +18,7 @@ public class Enemy extends Unit {
     }
 
     public void onDeath(){
-        //TODO: implement onDeath
+        messageCallBackToView.UpdateTile('.',this.position.getX(), this.position.getY());
     }
 
     @Override
@@ -26,7 +27,7 @@ public class Enemy extends Unit {
     }
 
     public void visit(Player p){
-        battle(p);
+        if(p.isAlive())battle(p);
         if(!p.isAlive()){
             p.onDeath();
         }
@@ -36,7 +37,8 @@ public class Enemy extends Unit {
         //DO NOTHING
     }
 
-    public void OnEnemyTurn(Player  player){
 
-    }
+
+    public abstract Position OnEnemyTurn(Player  player);
+
 }

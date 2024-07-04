@@ -4,6 +4,8 @@ import Model.tiles.units.Unit;
 import Model.tiles.units.enemies.Enemy;
 import utilsGeneral.MessageCallBackToView;
 
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
 
 public abstract class Player extends Unit {
@@ -57,11 +59,30 @@ public abstract class Player extends Unit {
     }
 
     public void visit(Enemy enemy){
-        battle(enemy);
+        if(enemy.isAlive()) battle(enemy);
+    }
+
+
+    public void battle(Enemy enemy) {
+        super.battle(enemy);
         if(!enemy.isAlive()){
             addExperience(enemy.getExperience());
             enemy.onDeath();
         }
+    }
+
+    public Dictionary<String, String> toDict() {
+        Hashtable<String,String> dict = new Hashtable<>();
+        dict.put("name", this.name);
+        dict.put("healthCapacity", this.health.getCapacity() + "");
+        dict.put("healthCurrent", this.health.getCurrent() + "");
+        dict.put("attack",attack +"");
+        dict.put("defense",defense +"");
+        dict.put("level",level +"");
+        dict.put("experience", experience +"");
+
+
+        return dict;
     }
 
     @Override

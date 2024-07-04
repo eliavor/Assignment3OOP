@@ -8,7 +8,10 @@ import Model.tiles.units.players.Player;
 import Model.utils.Health;
 import Model.utils.Position;
 import Model.utils.generators.Generator;
+import Model.utils.generators.RandomGenerator;
 import utilsGeneral.MessageCallBackToView;
+
+import java.util.Dictionary;
 
 public abstract class Unit extends Tile {
 
@@ -26,6 +29,7 @@ public abstract class Unit extends Tile {
         this.health = new Health(maxHealth);
         this.attack = attack;
         this.defense = defense;
+        generator = new RandomGenerator();
     }
 
     public void initialize(Position p ,Generator generator) {
@@ -45,19 +49,17 @@ public abstract class Unit extends Tile {
         return health.getCurrent() > 0;
     }
 
-    public void battle(Unit enemy) {
+    public void battle(Unit opponent) {
+        if(!opponent.isAlive()) return;
         int attack = this.attack();
-        int defense = enemy.defend();
-        int damageTaken = enemy.health.takeDamage(attack - defense);
+        int defense = opponent.defend();
+        int damageTaken = opponent.health.takeDamage(attack - defense);
+        messageCallBackToView.ShowBattleInfo(toDict(), opponent.toDict(), attack, defense);
 
     }
 
     public void interact(Tile tile) {
         tile.accept(this);
-    }
-
-    public void interact(int i, int i1, Tile[][] board) {
-        //do nothing
     }
 
     public void visit(Empty e){
@@ -67,6 +69,8 @@ public abstract class Unit extends Tile {
     public void visit(Wall W){
         //DO NOTHING
     }
+
+    public abstract Dictionary<String,String> toDict();
 
     public abstract void visit(Player p);
 
