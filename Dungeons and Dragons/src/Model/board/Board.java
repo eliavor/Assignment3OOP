@@ -101,10 +101,10 @@ public class Board {
                 player.interact(searchPosition(playerY, playerX + 1));
                 break;
             case 'e':
-                player.OnAbilityCast();
+                player.OnAbilityCast(enemies);
                 break;
             case 'q':
-                enemiesTick();
+                //do nothing
                 break;
             default:
                 break;
@@ -115,7 +115,7 @@ public class Board {
 
     public void enemiesTick(){
         for(Enemy enemy : enemies){
-            enemy.OnEnemyTurn();
+            enemy.OnEnemyTurn(player);
         }
     }
 

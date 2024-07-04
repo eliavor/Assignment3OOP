@@ -4,6 +4,8 @@ import Model.tiles.units.Unit;
 import Model.tiles.units.enemies.Enemy;
 import utilsGeneral.MessageCallBackToView;
 
+import java.util.List;
+
 public class Player extends Unit {
 
     public static final char SYMBOL = '@';
@@ -81,7 +83,7 @@ public class Player extends Unit {
         messageCallBackToView.UpdateTile('.', position.getX(), position.getY());
     }
 
-    public void OnAbilityCast(){
+    public void OnAbilityCast(List<Enemy> enemyList){
         //DO NOTHING - to be overridden by subclasses
     }
 
