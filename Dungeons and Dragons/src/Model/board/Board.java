@@ -1,12 +1,11 @@
 package Model.board;
 
+import Controller.LevelManager;
 import Model.tiles.units.enemies.Enemy;
 import Model.tiles.units.players.Player;
 import Model.utils.TileFactory;
 import utilsGeneral.MessageCallBackToView;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,34 +13,31 @@ import Model.tiles.Tile;
 
 public class Board {
 
-    private  int playerChoice;
+    private int playerChoice;
     private String content;
     private Tile[][] board;
     private List<Enemy> enemies;
     private Player player;
     private MessageCallBackToView messageCallBackToView;
+    private LevelManager levelManager;
 
     public Board(String path, MessageCallBackToView messageCallBack) {
-        try {
-            content = new String(Files.readAllBytes(Paths.get(path)));
-        } catch (IOException e) {
-            throw new RuntimeException("Error while reading the levels file: " + e.getMessage());
+        this.levelManager = new LevelManager(path);
+        this.messageCallBackToView = messageCallBack;
+        this.enemies = new ArrayList<>();
+        this.content = levelManager.getNextLevelContent();
+        if (this.content == null) {
+            throw new RuntimeException("No levels available to load.");
         }
-        messageCallBackToView = messageCallBack;
-        enemies = new ArrayList<>();
-
-
-        // Start the game
-
-
+        initializeBoard();
     }
-    public void startGame(int playerChoice){
+
+    public void startGame(int playerChoice) {
         this.playerChoice = playerChoice;
-        InitializeBoard();
-
+        initializeBoard();
     }
 
-    public void InitializeBoard() {
+    private void initializeBoard() {
         String[] rows = content.split("\r\n");
         int height = rows.length;
         int width = rows[0].length();
@@ -53,29 +49,25 @@ public class Board {
             for (int j = 0; j < width; j++) {
                 char tileChar = rows[i].charAt(j);
                 Tile tile;
-                if(tileChar == '@'){
+                if (tileChar == '@') {
                     player = TileFactory.createPlayer(playerChoice, j, i, tileChar, messageCallBackToView);
                     tile = player;
-                }
-
-                else {
+                } else {
                     tile = TileFactory.createTile(j, i, tileChar, messageCallBackToView);
-
                     if (TileFactory.isEnemy(tileChar)) {
                         enemies.add((Enemy) tile);
                     }
                 }
-
                 board[i][j] = tile;
             }
         }
         messageCallBackToView.ShowPlayerStats(TileFactory.players.get(playerChoice));
     }
 
-    private Tile searchPosition(int y, int x){
-        for(int i  = 0; i < board[0].length; i++){
-            for(int j = 0; j < board.length; j++){
-                if(board[j][i].position.getX() == x && board[j][i].position.getY() == y){
+    private Tile searchPosition(int y, int x) {
+        for (int i = 0; i < board[0].length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                if (board[j][i].position.getX() == x && board[j][i].position.getY() == y) {
                     return board[j][i];
                 }
             }
@@ -87,15 +79,14 @@ public class Board {
         int playerX = player.position.getX();
         int playerY = player.position.getY();
         switch (c) {
-
             case 'w':
-                player.interact(searchPosition(playerY - 1,playerX));
+                player.interact(searchPosition(playerY - 1, playerX));
                 break;
             case 'a':
                 player.interact(searchPosition(playerY, playerX - 1));
                 break;
             case 's':
-                player.interact(searchPosition(playerY + 1,playerX));
+                player.interact(searchPosition(playerY + 1, playerX));
                 break;
             case 'd':
                 player.interact(searchPosition(playerY, playerX + 1));
@@ -104,17 +95,27 @@ public class Board {
                 player.OnAbilityCast(enemies);
                 break;
             case 'q':
-                //do nothing
+                // do nothing
                 break;
             default:
                 break;
         }
         enemiesTick();
         messageCallBackToView.ShowPlayerStats(TileFactory.players.get(playerChoice));
+
+        // Check if all enemies are defeated to proceed to the next level
+        if (enemies.isEmpty()) {
+            content = levelManager.getNextLevelContent();
+            if (content != null) {
+                initializeBoard();
+            } else {
+                messageCallBackToView.abilityErrorMessage("Congratulations! You've completed all levels!");
+            }
+        }
     }
 
-    public void enemiesTick(){
-        for(Enemy enemy : enemies){
+    public void enemiesTick() {
+        for (Enemy enemy : enemies) {
             enemy.OnEnemyTurn(player);
         }
     }
