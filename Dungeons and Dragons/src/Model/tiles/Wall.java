@@ -1,13 +1,14 @@
 package Model.tiles;
 
 import Model.tiles.units.Unit;
+import utilsGeneral.MessageCallBackToView;
 
 public class Wall extends Tile{
 
     public static final char SYMBOL = '#';
 
-    public Wall() {
-        super(SYMBOL);
+    public Wall(int x, int y, MessageCallBackToView messageCallBackToView) {
+        super(SYMBOL, x, y, messageCallBackToView);
     }
 
 
@@ -16,7 +17,9 @@ public class Wall extends Tile{
         unit.visit(this);
 
     }
-    public void interact(int i, int i1, Tile[][] board) {
-        //do nothing
+
+    @Override
+    public void interact(Tile tile) {
+
     }
 }

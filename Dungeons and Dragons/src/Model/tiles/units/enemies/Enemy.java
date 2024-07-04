@@ -1,4 +1,4 @@
-package Model.tiles.units.enenies;
+package Model.tiles.units.enemies;
 
 import Model.tiles.units.Unit;
 import Model.tiles.units.players.Player;

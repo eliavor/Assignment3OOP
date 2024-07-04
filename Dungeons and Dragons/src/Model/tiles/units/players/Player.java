@@ -1,7 +1,7 @@
 package Model.tiles.units.players;
 
 import Model.tiles.units.Unit;
-import Model.tiles.units.enenies.Enemy;
+import Model.tiles.units.enemies.Enemy;
 import utilsGeneral.MessageCallBackToView;
 
 public class Player extends Unit {
@@ -79,6 +79,10 @@ public class Player extends Unit {
     @Override
     public void onDeath() {
         messageCallBackToView.UpdateTile('.', position.getX(), position.getY());
+    }
+
+    public void specialAbility(){
+        //DO NOTHING - to be overridden by subclasses
     }
 
 }

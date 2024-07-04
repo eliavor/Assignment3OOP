@@ -42,7 +42,7 @@ public class CLI implements View{
                 playerStats(playerStats);
             }
         };
-
+        this.messageCallBackToController = messageCallBackToController;
     }
 
     @Override
@@ -54,6 +54,7 @@ public class CLI implements View{
         int i = 1;
         for(Dictionary<String, String> player : availablePlayers){
             toPrint = toPrint + i + ". "+ ViewUtils.CreatePlayerString(player) + "\n";
+            i++;
         }
         System.out.println(toPrint);
         messageCallBackToController.nextTick(true);
@@ -74,15 +75,18 @@ public class CLI implements View{
 
     private void playerStats(Dictionary<String, String> playerStats){
         if(playerString == null){
-            battleString = "";
+            playerString = "";
         }
         playerString += ViewUtils.CreatePlayerString(playerStats);
         printTick();
     }
 
     private void printTick(){
+        if(battleString == null){
+            battleString = "";
+        }
         String boardString = ViewUtils.CreateBoardString(board);
-        String toPrint = battleString +"/n" + boardString + "/n" + playerString;
+        String toPrint = battleString +"\n" + boardString + "\n" + playerString;
         System.out.println(toPrint);
         battleString = "";
         playerString = "";

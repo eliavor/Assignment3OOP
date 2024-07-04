@@ -3,7 +3,7 @@ package Model.tiles.units;
 import Model.tiles.Empty;
 import Model.tiles.Tile;
 import Model.tiles.Wall;
-import Model.tiles.units.enenies.Enemy;
+import Model.tiles.units.enemies.Enemy;
 import Model.tiles.units.players.Player;
 import Model.utils.Health;
 import Model.utils.Position;
@@ -19,19 +19,13 @@ public abstract class Unit extends Tile {
 
     protected Generator generator;
 
-    protected MessageCallBackToView messageCallBackToView;
-
-
     public Unit(int x, int y, char symbol, String name,int maxHealth, int attack, int defense, MessageCallBackToView messageCallBackToView) {
-        super(symbol);
+        super(symbol, x, y, messageCallBackToView);
 
         this.name = name;
-        position = new Position(x, y);
         this.health = new Health(maxHealth);
         this.attack = attack;
         this.defense = defense;
-        this.messageCallBackToView = messageCallBackToView;
-        messageCallBackToView.UpdateTile(this.symbol, this.position.getX(), this.position.getY() );
     }
 
     public void initialize(Position p ,Generator generator) {
