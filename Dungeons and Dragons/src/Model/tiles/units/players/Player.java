@@ -6,7 +6,7 @@ import utilsGeneral.MessageCallBackToView;
 
 import java.util.List;
 
-public class Player extends Unit {
+public abstract class Player extends Unit {
 
     public static final char SYMBOL = '@';
 
@@ -16,7 +16,6 @@ public class Player extends Unit {
     protected static final int DEFENSE_GAIN = 1;
 
     protected int level;
-
     protected int experience;
 
     public Player(int x, int y, String name, int health, int attack, int defense, MessageCallBackToView messageCallBackToView) {
@@ -25,23 +24,11 @@ public class Player extends Unit {
         experience = 0;
     }
 
-
     public void addExperience(int experience){
         this.experience += experience;
         while(experience >= levelRequirement()){
-            levelUp();
+            UponLevelUp();
         }
-    }
-    public void levelUp(){
-        this.experience -= 50*level;
-        this.level++;
-        int healthGain = healthGain();
-        int attackGain = attackGain();
-        int defenseGain = defenseGain();
-        health.increaseMax(healthGain);
-        health.heal();
-        attack += attackGain;
-        defense += defenseGain;
     }
 
     protected int levelRequirement(){
@@ -63,11 +50,10 @@ public class Player extends Unit {
     @Override
     public void accept(Unit unit) {
         unit.visit(this);
-
     }
 
     public void visit(Player p){
-        //DO NOTHING
+        // DO NOTHING
     }
 
     public void visit(Enemy enemy){
@@ -83,16 +69,21 @@ public class Player extends Unit {
         messageCallBackToView.UpdateTile('.', position.getX(), position.getY());
     }
 
-    public void OnAbilityCast(List<Enemy> enemyList){
-        //DO NOTHING - to be overridden by subclasses
+    public abstract void OnAbilityCast(List<Enemy> enemies);
+
+    protected void UponLevelUp(){
+        this.experience -= levelRequirement();
+        this.level++;
+        int healthGain = healthGain();
+        int attackGain = attackGain();
+        int defenseGain = defenseGain();
+        health.increaseMax(healthGain);
+        health.heal();
+        attack += attackGain;
+        defense += defenseGain;
     }
 
-    public void UponLevelUp(){
-        //DO NOTHING - to be overridden by subclasses
-    }
+    public abstract void OnGameTick();
 
-    public void OnGameTick(){
-        //DO NOTHING - to be overridden by subclasses
-    }
-
+    public abstract void OnAbilityCastAttempt(List<Enemy> enemies);
 }

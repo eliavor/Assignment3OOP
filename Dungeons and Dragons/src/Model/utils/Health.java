@@ -23,8 +23,17 @@ public class Health {
         return current;
     }
 
+    public int getCapacity() {
+        return capacity;
+    }
+
     public void increaseMax(int healthGain) {
         capacity += healthGain;
+
+    }
+
+    public void setCurrent(int currentHealth){
+        current = currentHealth;
 
     }
 
