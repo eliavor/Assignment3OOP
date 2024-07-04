@@ -1,6 +1,6 @@
 package Model.board;
 
-import Model.tiles.units.enenies.Enemy;
+import Model.tiles.units.enemies.Enemy;
 import Model.tiles.units.players.Player;
 import Model.utils.TileFactory;
 import utilsGeneral.MessageCallBackToView;
@@ -18,7 +18,7 @@ public class Board {
     private String content;
     private Tile[][] board;
     private List<Enemy> enemies;
-    private Tile player;
+    private Player player;
     private MessageCallBackToView messageCallBackToView;
 
     public Board(String path, MessageCallBackToView messageCallBack) {
@@ -29,33 +29,35 @@ public class Board {
         }
         messageCallBackToView = messageCallBack;
         enemies = new ArrayList<>();
-        this.playerChoice = playerChoice;
+
 
         // Start the game
 
 
     }
     public void startGame(int playerChoice){
-        //TODO: Implement this method
+        this.playerChoice = playerChoice;
         InitializeBoard();
+
     }
 
     public void InitializeBoard() {
-        String[] rows = content.split("\n");
+        String[] rows = content.split("\r\n");
         int height = rows.length;
         int width = rows[0].length();
 
         board = new Tile[height][width];
-        messageCallBackToView.LoadMap(height, width);
+        messageCallBackToView.LoadMap(width, height);
 
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 char tileChar = rows[i].charAt(j);
                 Tile tile;
                 if(tileChar == '@'){
-                    tile = TileFactory.createPlayer(playerChoice, j, i, tileChar, messageCallBackToView);
-                    player = tile;
+                    player = TileFactory.createPlayer(playerChoice, j, i, tileChar, messageCallBackToView);
+                    tile = player;
                 }
+
                 else {
                     tile = TileFactory.createTile(j, i, tileChar, messageCallBackToView);
 
@@ -67,6 +69,7 @@ public class Board {
                 board[i][j] = tile;
             }
         }
+        messageCallBackToView.ShowPlayerStats(TileFactory.players.get(playerChoice));
     }
 
     public void handleUserInput(char c) {
@@ -87,7 +90,7 @@ public class Board {
                 player.interact(board[playerY][playerX + 1]);
                 break;
             case 'e':
-
+                player.specialAbility();
                 break;
             case 'q':
                 enemiesTick();
@@ -95,6 +98,8 @@ public class Board {
             default:
                 break;
         }
+        enemiesTick();
+        messageCallBackToView.ShowPlayerStats(TileFactory.players.get(playerChoice));
     }
 
     public void enemiesTick(){
@@ -103,4 +108,7 @@ public class Board {
         }
     }
 
+    public void presentPlayerInfo() {
+        messageCallBackToView.initiateGame(TileFactory.ChoosePlayer());
+    }
 }

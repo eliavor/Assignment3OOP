@@ -30,10 +30,10 @@ public class Controller {
 
     private void handleUserFirstInput(){
         String userInput = sc.nextLine();
-        while (userInput.length() != 1 || userInput.charAt(0) >'8' || userInput.charAt(0) < '1'){
+        while (userInput.length() != 1 || userInput.charAt(0) >'6' || userInput.charAt(0) < '1'){
             userInput = sc.nextLine();
         }
-        b.StartGame(userInput.charAt(0) - '0');
+        b.startGame(userInput.charAt(0) - '1');
     }
 
     private void handleUserInput(){
@@ -45,7 +45,7 @@ public class Controller {
         validInput.add('e');
         validInput.add('q');
         String userInput = sc.nextLine();
-        while (userInput.length() != 1 || !validInput.contains(userInput.charAt(0)){
+        while (userInput.length() != 1 || !validInput.contains(userInput.charAt(0))){
             userInput = sc.nextLine();
         }
         b.handleUserInput(userInput.charAt(0));
