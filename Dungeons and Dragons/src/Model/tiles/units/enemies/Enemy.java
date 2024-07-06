@@ -1,5 +1,6 @@
 package Model.tiles.units.enemies;
 
+import Model.tiles.Empty;
 import Model.tiles.units.Unit;
 import Model.tiles.units.players.Player;
 import Model.utils.Position;
@@ -23,13 +24,23 @@ public abstract class Enemy extends Unit {
 
     @Override
     public void accept(Unit unit) {
-        unit.visit(this);
+        if(isAlive()){
+            unit.visit(this);
+        }
+        else{
+            unit.visit(new Empty(this.position.getX(), this.position.getY(),messageCallBackToView));
+        }
     }
 
     public void visit(Player p){
-        if(p.isAlive())battle(p);
-        if(!p.isAlive()){
-            p.onDeath();
+        if(p.isAlive() &&  isAlive()){
+            battle(p);
+            if(!p.isAlive()){
+                p.onDeath();
+            }
+            if(!isAlive()){
+                onDeath();
+            }
         }
     }
 
