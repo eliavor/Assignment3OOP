@@ -24,10 +24,6 @@ public class Health {
     }
     public int getCapacity() {return capacity;}
 
-    public int getCapacity() {
-        return capacity;
-    }
-
     public void increaseMax(int healthGain) {
         capacity += healthGain;
 

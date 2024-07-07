@@ -37,6 +37,12 @@ public class CLI implements View{
             public void initiateGame(List<Dictionary<String, String>> availablePlayers){
                 InitiateGame(availablePlayers);
             }
+
+            @Override
+            public void abilityErrorMessage(String s) {
+
+            }
+
             @Override
             public void ShowPlayerStats(Dictionary<String, String> playerStats) {
                 playerStats(playerStats);

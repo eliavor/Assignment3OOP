@@ -29,7 +29,6 @@ public class Board {
         if (this.content == null) {
             throw new RuntimeException("No levels available to load.");
         }
-        initializeBoard();
     }
 
     public void startGame(int playerChoice) {
