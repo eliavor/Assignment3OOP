@@ -3,6 +3,7 @@ package Model.board;
 import Controller.LevelManager;
 import Model.tiles.units.enemies.Enemy;
 import Model.tiles.units.players.Player;
+import Model.utils.Position;
 import Model.utils.TileFactory;
 import utilsGeneral.MessageCallBackToView;
 
@@ -113,9 +114,16 @@ public class Board {
         }
     }
 
-    public void enemiesTick() {
-        for (Enemy enemy : enemies) {
-            enemy.OnEnemyTurn(player);
+
+    public void enemiesTick(){
+        for(Enemy enemy : enemies){
+            Position dest = enemy.OnEnemyTurn(player);
+            if(dest != null) {
+                Tile toInteract = searchPosition(dest.getY(), dest.getX());
+                if (toInteract != null) {
+                    enemy.interact(toInteract);
+                }
+            }
         }
     }
 
