@@ -21,32 +21,37 @@ public class Monster extends Enemy {
     @Override
     public Position OnEnemyTurn(Player player) {
 
-        if (this.position.distance(player.position) < visionRange) {
-            int dx = this.position.getX() - player.position.getX();
-            int dy = this.position.getY() - player.position.getY();
-            if (Math.abs(dx) > Math.abs(dy)) {
-                if (dx > 0) {
-                    return new Position(this.position.getX() - 1, this.position.getY());
+        if(isAlive()) {
+            if (this.position.distance(player.position) < visionRange) {
+                int dx = this.position.getX() - player.position.getX();
+                int dy = this.position.getY() - player.position.getY();
+                if (Math.abs(dx) > Math.abs(dy)) {
+                    if (dx > 0) {
+                        return new Position(this.position.getX() - 1, this.position.getY());
+                    } else {
+                        return new Position(this.position.getX() + 1, this.position.getY());
+                    }
                 } else {
-                    return new Position(this.position.getX() + 1, this.position.getY());
+                    if (dy > 0) {
+                        return new Position(this.position.getX(), this.position.getY() - 1);
+                    } else {
+                        return new Position(this.position.getX(), this.position.getY() + 1);
+                    }
                 }
             } else {
-                if (dy > 0) {
-                    return new Position(this.position.getX(), this.position.getY() - 1);
-                } else {
-                    return new Position(this.position.getX(), this.position.getY() + 1);
-                }
+                RandomGenerator RG = new RandomGenerator();
+                int whereToGo = RG.generate(4);
+                return switch (whereToGo) {
+                    case (0) -> new Position(this.position.getX() - 1, this.position.getY());
+                    case (1) -> new Position(this.position.getX() + 1, this.position.getY());
+                    case (2) -> new Position(this.position.getX(), this.position.getY() - 1);
+                    case (3) -> new Position(this.position.getX(), this.position.getY() + 1);
+                    default -> null;
+                };
             }
-        } else {
-            RandomGenerator RG = new RandomGenerator();
-            int whereToGo = RG.generate(4);
-            return switch (whereToGo) {
-                case (0) -> new Position(this.position.getX() - 1, this.position.getY());
-                case (1) -> new Position(this.position.getX() + 1, this.position.getY());
-                case (2) -> new Position(this.position.getX(), this.position.getY() - 1);
-                case (3) -> new Position(this.position.getX(), this.position.getY() + 1);
-                default -> null;
-            };
+        }
+        else{
+            return position;
         }
 
     }
