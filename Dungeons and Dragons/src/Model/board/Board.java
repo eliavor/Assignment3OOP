@@ -60,7 +60,7 @@ public class Board {
                 board[i][j] = tile;
             }
         }
-        messageCallBackToView.ShowPlayerStats(TileFactory.players.get(playerChoice));
+        messageCallBackToView.ShowPlayerStats(player.toDict());
     }
 
     private Tile searchPosition(int y, int x) {
@@ -100,7 +100,7 @@ public class Board {
                 break;
         }
         enemiesTick();
-        messageCallBackToView.ShowPlayerStats(TileFactory.players.get(playerChoice));
+        messageCallBackToView.ShowPlayerStats(player.toDict());
 
         // Check if all enemies are defeated to proceed to the next level
         if (enemies.isEmpty()) {
