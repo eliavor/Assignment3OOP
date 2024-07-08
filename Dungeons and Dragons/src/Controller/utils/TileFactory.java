@@ -1,4 +1,4 @@
-package Model.utils;
+package Controller.utils;
 
 import Model.tiles.Empty;
 import Model.tiles.Tile;

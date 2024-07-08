@@ -55,16 +55,7 @@ public class CLI implements View{
     public MessageCallBackToView getMessageCallBack(){
         return this.messageCallBackToView;
     }
-    private void InitiateGame(List<Dictionary<String, String>> availablePlayers){
-        String toPrint = "";
-        int i = 1;
-        for(Dictionary<String, String> player : availablePlayers){
-            toPrint = toPrint + i + ". "+ ViewUtils.CreatePlayerString(player) + "\n";
-            i++;
-        }
-        System.out.println(toPrint);
-        messageCallBackToController.nextTick(true);
-    }
+
     private void updateTile(char c, int x, int y){
         board[y][x] = c;
     }
@@ -97,6 +88,18 @@ public class CLI implements View{
         battleString = "";
         playerString = "";
         messageCallBackToController.nextTick(false);
+    }
+
+
+    public void choosePlayer(List<Dictionary<String, String>> availablePlayers){
+        String toPrint = "";
+        int i = 1;
+        for(Dictionary<String, String> player : availablePlayers){
+            toPrint = toPrint + i + ". "+ ViewUtils.CreatePlayerString(player) + "\n";
+            i++;
+        }
+        System.out.println(toPrint);
+        messageCallBackToController.startGame();
     }
 
 

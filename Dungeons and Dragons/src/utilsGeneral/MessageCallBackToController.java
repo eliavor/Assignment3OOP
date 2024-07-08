@@ -2,5 +2,7 @@ package utilsGeneral;
 
 public interface MessageCallBackToController {
 
-    public void nextTick(boolean isFirstRound);
+    public void nextTick();
+
+    public void startGame();
 }
