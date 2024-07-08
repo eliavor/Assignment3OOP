@@ -2,12 +2,14 @@ package Model.tiles;
 
 import Model.tiles.units.Unit;
 import Model.utils.Position;
+import utilsGeneral.MessageCallBackTileToLevel;
 import utilsGeneral.MessageCallBackToView;
 
 public abstract class Tile {
 
     public Position position;
     protected char symbol;
+    protected MessageCallBackTileToLevel messageCallBackTileToLevel;
 
     protected MessageCallBackToView messageCallBackToView;
 
@@ -15,7 +17,10 @@ public abstract class Tile {
         this.symbol = symbol;
         this.position = new Position(x, y);
         messageCallBackToView.UpdateTile(this.symbol, this.position.getX(), this.position.getY());
+    }
 
+    public void setMessageCallBackTileToLevel(MessageCallBackTileToLevel messageCallBackTileToLevel) {
+        this.messageCallBackTileToLevel = messageCallBackTileToLevel;
     }
 
     public void initialize(Position position) {
@@ -30,11 +35,7 @@ public abstract class Tile {
     public abstract void accept(Unit unit);
 
     public void swapPosition(Tile tile) {
-        Position temp = this.position;
-        this.position = tile.position;
-        tile.position = temp;
-
-
+        messageCallBackTileToLevel.swapPosition(this, tile);
 
 
         messageCallBackToView.UpdateTile(this.symbol, this.position.getX(), this.position.getY());
