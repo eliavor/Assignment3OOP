@@ -19,6 +19,7 @@ public abstract class Enemy extends Unit {
     }
 
     public void onDeath(){
+        messageCallBackTileToLevel.unitDead(position);
         messageCallBackToView.UpdateTile('.',this.position.getX(), this.position.getY());
     }
 

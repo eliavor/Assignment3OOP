@@ -87,7 +87,7 @@ public class CLI implements View{
         System.out.println(toPrint);
         battleString = "";
         playerString = "";
-        messageCallBackToController.nextTick(false);
+        messageCallBackToController.nextTick();
     }
 
 

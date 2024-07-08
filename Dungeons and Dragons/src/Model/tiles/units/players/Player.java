@@ -87,7 +87,9 @@ public abstract class Player extends Unit {
 
     @Override
     public void onDeath() {
+        messageCallBackTileToLevel.playerDead(this);
         messageCallBackToView.UpdateTile('.', position.getX(), position.getY());
+
     }
 
     public abstract void OnAbilityCast(List<Enemy> enemies);
