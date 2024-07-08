@@ -1,6 +1,7 @@
 package Model.utils;
 
-public class Position {
+
+public class Position implements Comparable<Position>{
     private int x;
     private int y;
 
@@ -8,6 +9,10 @@ public class Position {
         this.x = x;
         this.y = y;
 
+    }
+    public Position(Position pos) {
+        this.x = pos.getX();
+        this.y = pos.getY();
     }
 
     public double distance(Position other) {
@@ -25,5 +30,20 @@ public class Position {
     public void setPos(int x, int y){
         this.x = x;
         this.y = y;
+    }
+    public int compareTo(Position other) {
+        if(other.getY() < getY()){
+            return 1;
+        }
+        else if(other.getY() > getY()){
+            return -1;
+        }
+        if(other.getX() < getX()){
+            return 1;
+        }
+        else if(other.getX() > getX()){
+            return -1;
+        }
+        return 0;
     }
 }

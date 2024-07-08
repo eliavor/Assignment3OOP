@@ -4,6 +4,7 @@ import Controller.utils.InputHandler;
 import Controller.initializers.LevelInitializer;
 import Controller.utils.TileFactory;
 import Model.game.Game;
+import utilsGeneral.MessageCallBackModelToController;
 import utilsGeneral.MessageCallBackToController;
 import View.utils.View;
 import Model.tiles.*;
@@ -18,6 +19,7 @@ public class Controller {
     private final LevelInitializer levelManager;
     private final InputHandler inputHandler;
     private MessageCallBackToController messageCallBackToController;
+    private MessageCallBackModelToController messageCallBackModelToController;
     private View view;
     private Game game;
     private int playerID;
@@ -42,10 +44,13 @@ public class Controller {
                  Controller.this.startGame();
              }
          };
-    }
 
-    public MessageCallBackToController getMessageCallback(){
-        return  messageCallBackToController;
+         messageCallBackModelToController = new MessageCallBackModelToController() {
+             @Override
+             public void askNextLevel(){
+
+             }
+         };
     }
 
     public void setView(View view){
