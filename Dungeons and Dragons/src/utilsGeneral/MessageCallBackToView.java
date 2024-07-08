@@ -13,7 +13,7 @@ public interface MessageCallBackToView {
 
     void ShowPlayerStats(Dictionary<String, String> playerStats);
 
-    void initiateGame(List<Dictionary<String, String>> availablePlayers);
-
     void abilityErrorMessage(String s);
+
+    void playerDeath();
 }

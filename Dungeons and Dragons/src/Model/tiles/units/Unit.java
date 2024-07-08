@@ -37,7 +37,7 @@ public abstract class Unit extends Tile {
     }
 
     public void initialize(Position p ,Generator generator) {
-        super.initialize(p);
+//        super.initialize(p);
         this.generator = generator;
     }
 

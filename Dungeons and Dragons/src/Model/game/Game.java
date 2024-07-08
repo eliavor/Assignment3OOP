@@ -14,12 +14,19 @@ import java.util.List;
 public class Game {
     private Level level;
     private int currentLevel;
+    private Player player;
     private MessageCallBackModelToController messageCallBackModelToController;
     private MessageCallBackToView messageCallBackToView;
 
     public Game(MessageCallBackModelToController messageCallBackModelToController, MessageCallBackToView messageCallBackToView) {
         currentLevel = 0;
         this.messageCallBackToView = messageCallBackToView;
+        this.messageCallBackModelToController = messageCallBackModelToController;
+    }
+
+    public void firstTick(Player player){
+        this.player = player;
+        messageCallBackToView.ShowPlayerStats(player.toDict());
     }
 
     public void nextTick(Character c) {
@@ -40,6 +47,14 @@ public class Game {
     }
 
     public void nextLevel(List<Tile> tiles, List<Enemy> enemies, Player player) {
+        this.player = player;
         level = new Level(tiles, enemies, player, messageCallBackToView);
+        messageCallBackToView.ShowPlayerStats(player.toDict());
+    }
+
+    public boolean isGameOver(){
+        if(currentLevel == 5 && level.isLevelOver()) return true;
+        if(!player.isAlive()) return true;
+        return false;
     }
 }

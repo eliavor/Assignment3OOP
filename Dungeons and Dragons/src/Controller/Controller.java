@@ -48,7 +48,7 @@ public class Controller {
          messageCallBackModelToController = new MessageCallBackModelToController() {
              @Override
              public void askNextLevel(){
-
+                nextLevel();
              }
          };
     }
@@ -69,18 +69,29 @@ public class Controller {
     public void startGame(){
         playerID = inputHandler.handleUserFirstInput();
         levelManager.StartGame(playerID);
-        tiles = levelManager.CreateTileList(playerID);
-        enemies = levelManager.GetEnenmyList();
-        player = levelManager.GetPlayer();
-        this.game = new Game(tiles, enemies,  player);
+        this.game = new Game(messageCallBackModelToController, view.getMessageCallBack());
+
+        nextLevel();
     }
 
     public void nextLevel(){
+        if(levelManager.getCurerntLevel() == 4){
+            view.winGame();
+        }
         levelManager.nextLevel();
         tiles = levelManager.CreateTileList(playerID);
+
         enemies = levelManager.GetEnenmyList();
         player = levelManager.GetPlayer();
+
+        view.getMessageCallBack().LoadMap(levelManager.getWidth(), levelManager.getHeight());
         game.nextLevel(tiles,enemies, player);
+
     }
+
+    public MessageCallBackToController getMessageCallback() {
+        return messageCallBackToController;
+    }
+
 
 }

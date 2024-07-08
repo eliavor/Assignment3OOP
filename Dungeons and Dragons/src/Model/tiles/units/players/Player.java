@@ -29,7 +29,7 @@ public abstract class Player extends Unit {
 
     public void addExperience(int experience){
         this.experience += experience;
-        while(experience >= levelRequirement()){
+        while(this.experience >= levelRequirement()){
             UponLevelUp();
         }
     }
@@ -91,7 +91,8 @@ public abstract class Player extends Unit {
     @Override
     public void onDeath() {
         messageCallBackTileToLevel.playerDead(this);
-        messageCallBackToView.UpdateTile('.', position.getX(), position.getY());
+        messageCallBackToView.UpdateTile('X', position.getX(), position.getY());
+        messageCallBackToView.playerDeath();
 
     }
 

@@ -11,4 +11,5 @@ public interface View {
     public MessageCallBackToView getMessageCallBack();
 
     public void choosePlayer(List<Dictionary<String, String>> players);
+    public void winGame();
 }

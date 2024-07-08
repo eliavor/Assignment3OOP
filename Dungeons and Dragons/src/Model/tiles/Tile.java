@@ -16,15 +16,23 @@ public abstract class Tile {
     public Tile(char symbol,int x, int y) {
         this.symbol = symbol;
         this.position = new Position(x, y);
-        messageCallBackToView.UpdateTile(this.symbol, this.position.getX(), this.position.getY());
+
     }
+
+
 
     public void setMessageCallBackTileToLevel(MessageCallBackTileToLevel messageCallBackTileToLevel) {
         this.messageCallBackTileToLevel = messageCallBackTileToLevel;
     }
 
-    public void initialize(Position position) {
-        this.position = position;
+    public void setMessageCallBackToView(MessageCallBackToView messageCallBackToView) {
+        this.messageCallBackToView = messageCallBackToView;
+    }
+
+    public void initialize(MessageCallBackToView messageCallBackToView, MessageCallBackTileToLevel messageCallBackTileToLevel) {
+        this.messageCallBackTileToLevel = messageCallBackTileToLevel;
+        this.messageCallBackToView = messageCallBackToView;
+        messageCallBackToView.UpdateTile(symbol, position.getX(), position.getY());
     }
 
     @Override
@@ -45,4 +53,8 @@ public abstract class Tile {
 
     public abstract void interact(Tile tile);
 
+    public void setPosition(Position p) {
+        position = p;
+        messageCallBackToView.UpdateTile(symbol, position.getX(), position.getY());
+    }
 }

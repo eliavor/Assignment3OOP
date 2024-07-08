@@ -20,10 +20,6 @@ public class Level {
     private MessageCallBackTileToLevel messageCallBackTileToLevel;
 
     public Level(List<Tile> tiles, List<Enemy> enemies, Player player, MessageCallBackToView messageCallBackToView){
-        board = new Board(tiles, messageCallBackTileToLevel);
-        this.enemies = enemies;
-        this.player = player;
-        this.messageCallBackToView = messageCallBackToView;
         messageCallBackTileToLevel = new MessageCallBackTileToLevel() {
             @Override
             public void enemyDead(Enemy enemy) {
@@ -41,6 +37,15 @@ public class Level {
                 board.swapPosition(t1, t2);
             }
         };
+
+
+        board = new Board(tiles, messageCallBackTileToLevel, messageCallBackToView);
+        this.enemies = enemies;
+        this.player = player;
+        this.messageCallBackToView = messageCallBackToView;
+
+
+
     }
 
 
@@ -63,7 +68,7 @@ public class Level {
                 player.interact(board.getTile(playerY , playerX + 1));
                 break;
             case 'e':
-                player.OnAbilityCast(enemies);
+                player.OnAbilityCastAttempt(enemies);
                 break;
             case 'q':
                 // do nothing
@@ -74,8 +79,13 @@ public class Level {
 
         player.OnGameTick(  );
         for(Enemy e: enemies){
-            e.OnEnemyTurn(player);
+            Position p = e.OnEnemyTurn(player);
+            if(p!=null && p.compareTo(e.position) != 0){
+                e.interact(board.getTile(p.getY(), p.getX()));
+            }
         }
+        messageCallBackToView.ShowPlayerStats(player.toDict());
+
 
     }
 

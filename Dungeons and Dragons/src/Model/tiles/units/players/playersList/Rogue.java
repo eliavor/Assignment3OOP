@@ -29,6 +29,7 @@ public class Rogue extends Player {
         for (Enemy enemy : enemiesInRange) {
             // Deal damage to the enemy
             enemy.health.takeDamage(attack);
+            messageCallBackToView.ShowBattleInfo(toDict(), enemy.toDict(), attack, 0);
         }
     }
 

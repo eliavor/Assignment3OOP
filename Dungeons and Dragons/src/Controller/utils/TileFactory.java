@@ -27,6 +27,7 @@ public class TileFactory {
             () -> new Mage(0, 0, "Thoros of Myr", 250, 25, 4, 150, 20, 20, 3, 4),
             () -> new Rogue(0, 0, "Arya Stark", 150, 40, 2, 20),
             () -> new Rogue(0, 0, "Bronn", 250, 35, 3, 50)
+
     );
 
     public static final Map<Character, Supplier<Enemy>> enemies = Map.ofEntries(
@@ -89,4 +90,5 @@ public class TileFactory {
         }
         return playerDetails;
     }
+
 }

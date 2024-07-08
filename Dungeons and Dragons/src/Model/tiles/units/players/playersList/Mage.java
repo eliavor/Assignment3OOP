@@ -43,7 +43,7 @@ public class Mage extends Player {
 
             // Deal damage to the selected enemy
             target.health.takeDamage(damage);
-
+            messageCallBackToView.ShowBattleInfo(toDict(), target.toDict(), damage, 0);
             // Remove dead enemies from the list
             enemiesInRange = enemiesInRange.stream()
                     .filter(Enemy::isAlive)

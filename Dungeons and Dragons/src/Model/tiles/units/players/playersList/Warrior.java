@@ -21,10 +21,6 @@ public class Warrior extends Player {
 
     @Override
     public void OnAbilityCast(List<Enemy> enemies) {
-        if (!isAbilityReady()) {
-            messageCallBackToView.abilityErrorMessage("Ability is not ready yet!");
-            return;
-        }
 
         remainingCoolDown = abilityCoolDown;
 
@@ -47,6 +43,7 @@ public class Warrior extends Player {
 
             // Deal damage to the selected enemy
             target.health.takeDamage(damage);
+            messageCallBackToView.ShowBattleInfo(toDict(), target.toDict(), damage, 0);
         }
     }
 

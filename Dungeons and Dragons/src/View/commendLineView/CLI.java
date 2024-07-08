@@ -11,6 +11,8 @@ public class CLI implements View{
     private Character[][] board;
     private String battleString;
     private String playerString;
+    private String[] died;
+    private String[] win;
 
     private  MessageCallBackToView messageCallBackToView;
 
@@ -33,13 +35,26 @@ public class CLI implements View{
             public void ShowBattleInfo(Dictionary<String, String> battleInfo, Dictionary<String, String> battleInfo2, int attacker, int defender) {
                 battleInfo(battleInfo, battleInfo2, attacker, defender);
             }
-            @Override
-            public void initiateGame(List<Dictionary<String, String>> availablePlayers){
-                InitiateGame(availablePlayers);
-            }
+
 
             @Override
             public void abilityErrorMessage(String s) {
+                System.out.println(s);
+            }
+
+            @Override
+            public void playerDeath() {
+                died = new String[]{
+                        " __        __    _  _____ _____ _______ ______ ",
+                        " \\ \\      / /__ | ||  ___|  __ \\_   _|  ____|",
+                        "  \\ \\ /\\ / / _ \\| || |_  | |  | || | | |__   ",
+                        "   \\ V  V /  __/| ||  _| | |  | || | |  __|  ",
+                        "    \\_/\\_/ \\___||_||_|   |_|  |_||_| |_|     ",
+                        "                                              "
+                };
+
+                // Print WASTED Art
+
 
             }
 
@@ -68,6 +83,7 @@ public class CLI implements View{
             battleString = "";
         }
         battleString += ViewUtils.CreateBattleString(battleInfo1, battleInfo2, attacker, defender);
+        battleString += "\n";
     }
 
     private void playerStats(Dictionary<String, String> playerStats){
@@ -87,6 +103,16 @@ public class CLI implements View{
         System.out.println(toPrint);
         battleString = "";
         playerString = "";
+        if(died != null){
+            for (String line : died) {
+                System.out.println(line);
+            }
+        }
+        if(win != null){
+            for (String line : win) {
+                System.out.println(line);
+            }
+        }
         messageCallBackToController.nextTick();
     }
 
@@ -100,6 +126,28 @@ public class CLI implements View{
         }
         System.out.println(toPrint);
         messageCallBackToController.startGame();
+    }
+
+    @Override
+    public void winGame() {
+        String[] win = new String[]{
+                "       _______  ",
+                "    .-'       `-.",
+                "  .'             '.",
+                " /                 \\",
+                " |   GAME OVER!    |",
+                " |    _     _      |",
+                "  \\  (o)___(o)   /",
+                "   '.  \\_/ \\_/  .'",
+                "     '-._____.-'",
+                "         / / /",
+                "       _/ / /",
+                "      / _/ /",
+                "     / / _/",
+                "    /_/ /_/"
+        };
+
+
     }
 
 

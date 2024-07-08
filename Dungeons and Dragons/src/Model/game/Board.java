@@ -1,6 +1,6 @@
 package Model.game;
 import java.util.TreeMap;
-import Controller.utils.LevelManager;
+import Controller.initializers.LevelInitializer;
 import Model.tiles.Empty;
 import Model.tiles.units.enemies.Enemy;
 import Model.tiles.units.players.Player;
@@ -18,11 +18,11 @@ public class Board {
 
     private TreeMap<Position, Tile> board;
 
-    public Board(List<Tile> tiles, MessageCallBackTileToLevel messageCallBackTileToLevel) {
+    public Board(List<Tile> tiles, MessageCallBackTileToLevel messageCallBackTileToLevel, MessageCallBackToView messageCallBackToView) {
+        board = new TreeMap<>();
         for (Tile tile : tiles) {
-            tile.setMessageCallBackTileToLevel(messageCallBackTileToLevel);
-            Position p = new Position(tile.position);
-            board.put(p, tile);
+            tile.initialize(messageCallBackToView, messageCallBackTileToLevel);
+            board.put(tile.position, tile);
         }
     }
 
@@ -33,12 +33,16 @@ public class Board {
         board.put(p1, tile2);
         board.put(p2, tile1);
 
-        tile1.position = p2;
-        tile2.position = p1;
+        tile1.setPosition(p2);
+        tile2.setPosition(p1);
+
+
     }
 
     public void unitDead(Position position, MessageCallBackToView messageCallBack){
-        board.put(position,new Empty(position.getX(),position.getY(),messageCallBack));
+        Tile tile = new Empty(position.getX(),position.getY());
+        tile.setMessageCallBackToView(messageCallBack);
+        board.put(position,tile);
     }
 
     public Tile getTile(int y, int x){

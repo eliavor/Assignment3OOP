@@ -27,9 +27,12 @@ public class LevelInitializer {
     private Player player;
     private int playerID;
 
+    private  int width;
+    private  int height;
+
     public LevelInitializer(String directoryPath) {
         this.directoryPath = directoryPath;
-        currentLevel = 1;
+        currentLevel = 0;
         player = null;
         loadAllLevels();
     }
@@ -62,10 +65,12 @@ public class LevelInitializer {
         enemies = new ArrayList<>();
         List<String> lines;
         try {
-            lines = Files.readAllLines(Paths.get(levelPaths.get(currentLevel)));
+            lines = Files.readAllLines(Paths.get(levelPaths.get(currentLevel-1)));
         } catch (IOException e) {
             throw new RuntimeException("Error while reading the levels file: " + e.getMessage());
         }
+        width = lines.get(0).length();
+        height = lines.size();
         for (int i = 0; i < lines.size(); i++) {
             for (int j = 0; j < lines.get(i).length(); j++) {
                 char c = lines.get(i).charAt(j);
@@ -101,7 +106,6 @@ public class LevelInitializer {
 
     public  void StartGame(int playerID) {
         this.playerID = playerID;
-        initializeLevel();
     }
 
     public List<Tile> CreateTileList(int playerID) {
@@ -117,11 +121,25 @@ public class LevelInitializer {
     }
 
     public void nextLevel() {
-        if (currentLevel < levelPaths.size() - 1) {
+        if (currentLevel < levelPaths.size()) {
             currentLevel++;
             initializeLevel();
         } else {
             System.out.println("No more levels.");
+
         }
     }
+
+
+    public int getWidth(){
+        return width;
+    }
+    public int getHeight(){
+        return height;
+    }
+
+    public int getCurerntLevel(){
+        return currentLevel;
+    }
+
 }
