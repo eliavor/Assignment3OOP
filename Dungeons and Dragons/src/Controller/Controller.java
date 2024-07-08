@@ -1,7 +1,7 @@
 package Controller;
 
 import Controller.utils.InputHandler;
-import Controller.utils.LevelManager;
+import Controller.initializers.LevelInitializer;
 import Controller.utils.TileFactory;
 import Model.game.Game;
 import utilsGeneral.MessageCallBackToController;
@@ -15,7 +15,7 @@ import Model.tiles.units.enemies.Enemy;
 
 
 public class Controller {
-    private final LevelManager levelManager;
+    private final LevelInitializer levelManager;
     private final InputHandler inputHandler;
     private MessageCallBackToController messageCallBackToController;
     private View view;
@@ -28,10 +28,8 @@ public class Controller {
 
     public Controller(String pathToLevels){
 
-         levelManager = new LevelManager(pathToLevels);
-         view = null;
+         levelManager = new LevelInitializer(pathToLevels);
          inputHandler = new InputHandler();
-
 
          messageCallBackToController = new MessageCallBackToController() {
              @Override
@@ -46,38 +44,38 @@ public class Controller {
          };
     }
 
-    public void setView(View view){
-        this.view = view;
-        choosePlayer();
-
-    }
-
-    public void choosePlayer(){
-        view.choosePlayer(TileFactory.ChoosePlayer());
-        playerID = inputHandler.handleUserFirstInput();
-        tiles = LevelManager.CreateTileList(playerID);
-        enemies = LevelManager.GetEnenmyList();
-        player = LevelManager.GetPlayer();
-    }
-
-
-
-
-    public void nextTick(){
-        inputHandler.handleUserInput();
-    }
     public MessageCallBackToController getMessageCallback(){
         return  messageCallBackToController;
     }
 
+    public void setView(View view){
+        this.view = view;
+        view.choosePlayer(TileFactory.choosePlayer());
+    }
+
+    public void nextTick(){
+        char c = inputHandler.handleUserInput();
+        if(!game.isGameOver()){
+            game.nextTick(c);
+        }
+        //TODO: is it good?
+    }
 
     public void startGame(){
-
-        this.game = new Game( );
-        nextLevel();
+        playerID = inputHandler.handleUserFirstInput();
+        levelManager.StartGame(playerID);
+        tiles = levelManager.CreateTileList(playerID);
+        enemies = levelManager.GetEnenmyList();
+        player = levelManager.GetPlayer();
+        this.game = new Game(tiles, enemies,  player);
     }
+
     public void nextLevel(){
-        game.nextLevel(tiles,enemies, player.position);
+        levelManager.nextLevel();
+        tiles = levelManager.CreateTileList(playerID);
+        enemies = levelManager.GetEnenmyList();
+        player = levelManager.GetPlayer();
+        game.nextLevel(tiles,enemies, player);
     }
 
 }

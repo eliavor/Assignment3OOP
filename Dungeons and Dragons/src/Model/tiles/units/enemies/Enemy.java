@@ -9,8 +9,8 @@ import utilsGeneral.MessageCallBackToView;
 public abstract class Enemy extends Unit {
 
     protected int experienceValue;
-    public Enemy(int x, int y, String name, char symbol, int health , int attack, int defense, int experienceValue, MessageCallBackToView messageCallBackToView) {
-        super(x, y, symbol, name, health, attack, defense, messageCallBackToView);
+    public Enemy(int x, int y, String name, char symbol, int health , int attack, int defense, int experienceValue) {
+        super(x, y, symbol, name, health, attack, defense);
         this.experienceValue = experienceValue;
     }
 
@@ -28,7 +28,7 @@ public abstract class Enemy extends Unit {
             unit.visit(this);
         }
         else{
-            unit.visit(new Empty(this.position.getX(), this.position.getY(),messageCallBackToView));
+            unit.visit(new Empty(this.position.getX(), this.position.getY()));
         }
     }
 

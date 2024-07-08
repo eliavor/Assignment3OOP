@@ -11,9 +11,8 @@ public abstract class Tile {
 
     protected MessageCallBackToView messageCallBackToView;
 
-    public Tile(char symbol,int x, int y, MessageCallBackToView messageCallBackToView) {
+    public Tile(char symbol,int x, int y) {
         this.symbol = symbol;
-        this.messageCallBackToView = messageCallBackToView;
         this.position = new Position(x, y);
         messageCallBackToView.UpdateTile(this.symbol, this.position.getX(), this.position.getY());
 

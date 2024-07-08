@@ -2,6 +2,7 @@ package Model.tiles.units.players;
 
 import Model.tiles.units.Unit;
 import Model.tiles.units.enemies.Enemy;
+import Model.utils.Position;
 import utilsGeneral.MessageCallBackToView;
 
 import java.util.Dictionary;
@@ -20,8 +21,8 @@ public abstract class Player extends Unit {
     protected int level;
     protected int experience;
 
-    public Player(int x, int y, String name, int health, int attack, int defense, MessageCallBackToView messageCallBackToView) {
-        super(x, y, SYMBOL, name, health, attack, defense, messageCallBackToView);
+    public Player(int x, int y, String name, int health, int attack, int defense) {
+        super(x, y, SYMBOL, name, health, attack, defense);
         level = 1;
         experience = 0;
     }
@@ -32,6 +33,8 @@ public abstract class Player extends Unit {
             UponLevelUp();
         }
     }
+
+
 
     protected int levelRequirement(){
         return LEVEL_REQUIREMENT * level;
@@ -107,4 +110,5 @@ public abstract class Player extends Unit {
     public abstract void OnGameTick();
 
     public abstract void OnAbilityCastAttempt(List<Enemy> enemies);
+
 }

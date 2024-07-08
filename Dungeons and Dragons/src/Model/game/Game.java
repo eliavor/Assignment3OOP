@@ -9,28 +9,42 @@ import utilsGeneral.MessageCallBackToController;
 import java.util.List;
 
 public class Game {
+
+    private List<Tile> tiles;
+    private List<Enemy> enemies;
+    private Player player;
+
     private Level level;
     private int currentLevel;
-    private MessageCallBackModelToController messageCallBackModelToController;
+    private final int LEVELCOUNT = 4;
 
-    public Game(List<Tile> tiles, List<Enemy> enemies, Player player ){
+
+    //private MessageCallBackModelToController messageCallBackModelToController;
+
+    public Game(List<Tile> tiles, List<Enemy> enemies, Player payer ){
+        this.tiles = tiles;
+        this.enemies = enemies;
+        this.player = payer;
         currentLevel = 0;
+        level = new Level(tiles, enemies, player);
+
     }
-    public void nextTick(){
-        if(level.isLevelOver()){
-            currentLevel++;
-            if(currentLevel == 6){
-                //end game
-            }
-            else{
-                advanceLevel();
-            }
-        }
-        else{
-            level.nextTick();
+
+    public void nextTick(char c){
+        if(!level.isLevelOver()){
+
         }
     }
+
     public void advanceLevel(){
+
+    }
+
+    public boolean isGameOver(){
+        return player.isAlive();
+    }
+
+    public void nextLevel(List<Tile> tiles, List<Enemy> enemies, Player player){
 
     }
 }

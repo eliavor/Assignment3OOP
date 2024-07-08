@@ -61,4 +61,8 @@ public class Level {
         }
 
     }
+
+    public boolean isLevelOver() {
+        return false;
+    }
 }

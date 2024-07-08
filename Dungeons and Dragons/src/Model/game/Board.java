@@ -1,13 +1,8 @@
 package Model.game;
 import java.util.TreeMap;
-import Controller.utils.LevelManager;
-import Model.tiles.units.enemies.Enemy;
-import Model.tiles.units.players.Player;
-import Model.utils.Position;
-import Controller.utils.TileFactory;
-import utilsGeneral.MessageCallBackToView;
 
-import java.util.ArrayList;
+import Model.utils.Position;
+
 import java.util.List;
 
 import Model.tiles.Tile;

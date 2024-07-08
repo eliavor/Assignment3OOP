@@ -12,8 +12,8 @@ public class Rogue extends Player {
     private int cost;
     private int currentEnergy;
 
-    public Rogue(int x, int y, String name, int health, int attackPoints, int defensePoints, int cost, MessageCallBackToView messageCallBackToView) {
-        super(x, y, name, health, attackPoints, defensePoints, messageCallBackToView);
+    public Rogue(int x, int y, String name, int health, int attackPoints, int defensePoints, int cost) {
+        super(x, y, name, health, attackPoints, defensePoints);
         this.cost = cost;
         this.currentEnergy = 100;
     }

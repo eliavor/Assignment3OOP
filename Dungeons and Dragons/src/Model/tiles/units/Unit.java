@@ -22,14 +22,18 @@ public abstract class Unit extends Tile {
 
     protected Generator generator;
 
-    public Unit(int x, int y, char symbol, String name,int maxHealth, int attack, int defense, MessageCallBackToView messageCallBackToView) {
-        super(symbol, x, y, messageCallBackToView);
+    public Unit(int x, int y, char symbol, String name,int maxHealth, int attack, int defense) {
+        super(symbol, x, y);
 
         this.name = name;
         this.health = new Health(maxHealth);
         this.attack = attack;
         this.defense = defense;
         generator = new RandomGenerator();
+    }
+
+    public void setPosition(Position position){
+        this.position = position;
     }
 
     public void initialize(Position p ,Generator generator) {

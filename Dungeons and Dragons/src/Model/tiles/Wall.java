@@ -7,8 +7,8 @@ public class Wall extends Tile{
 
     public static final char SYMBOL = '#';
 
-    public Wall(int x, int y, MessageCallBackToView messageCallBackToView) {
-        super(SYMBOL, x, y, messageCallBackToView);
+    public Wall(int x, int y) {
+        super(SYMBOL, x, y);
     }
 
 

@@ -7,8 +7,8 @@ public class Empty extends Tile{
 
     public static final char SYMBOL = '.';
 
-    public Empty(int x, int y, MessageCallBackToView messageCallBackToView) {
-        super(SYMBOL, x, y, messageCallBackToView);
+    public Empty(int x, int y) {
+        super(SYMBOL, x, y);
     }
 
     @Override

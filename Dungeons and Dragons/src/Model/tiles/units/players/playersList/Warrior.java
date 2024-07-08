@@ -13,8 +13,8 @@ public class Warrior extends Player {
     private int abilityCoolDown;
     private int remainingCoolDown;
 
-    public Warrior(int x, int y, String name, int health, int attack, int defense, int cooldown, MessageCallBackToView messageCallBackToView) {
-        super(x, y, name, health, attack, defense, messageCallBackToView);
+    public Warrior(int x, int y, String name, int health, int attack, int defense, int cooldown) {
+        super(x, y, name, health, attack, defense);
         this.abilityCoolDown = cooldown;
         this.remainingCoolDown = 0;
     }
