@@ -20,7 +20,16 @@ public class Board {
 
     }
 
-    public getMessageCallback(){
+    public  getMessageCallback(){
+
+    }
+
+    public void swapPosition(Tile tile1, Tile tile2){
+
+
+    }
+
+    public void unitDead(Position position){
 
     }
 }

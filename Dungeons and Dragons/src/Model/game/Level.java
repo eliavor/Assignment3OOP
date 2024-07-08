@@ -55,7 +55,7 @@ public class Level {
                 break;
         }
 
-        player.OnGameTick();
+        player.OnGameTick(  );
         for(Enemy e: enemies){
             e.OnEnemyTurn(player);
         }
