@@ -46,4 +46,13 @@ public class Position implements Comparable<Position>{
         }
         return 0;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if(other instanceof Position){
+            Position p = (Position) other;
+            return x == p.getX() && y == p.getY();
+        }
+        return false;
+    }
 }
