@@ -1,6 +1,7 @@
 package Model.game;
 
 import Model.tiles.Tile;
+import Model.tiles.units.Unit;
 import Model.tiles.units.enemies.Enemy;
 import Model.tiles.units.players.Player;
 import Model.utils.Position;
@@ -13,13 +14,13 @@ public class Level {
 
 
     private List<Tile> tiles;
-    private List<Enemy> enemies;
+    private List<Unit> enemies;
     private Player player;
     public Board board;
     private MessageCallBackToView messageCallBackToView;
     private MessageCallBackTileToLevel messageCallBackTileToLevel;
 
-    public Level(List<Tile> tiles, List<Enemy> enemies, Player player, MessageCallBackToView messageCallBackToView){
+    public Level(List<Tile> tiles, List<Unit> enemies, Player player, MessageCallBackToView messageCallBackToView){
         messageCallBackTileToLevel = new MessageCallBackTileToLevel() {
             @Override
             public void enemyDead(Enemy enemy) {
@@ -78,7 +79,7 @@ public class Level {
         }
 
         player.OnGameTick(  );
-        for(Enemy e: enemies){
+        for(Unit e: enemies){
             Position p = e.OnEnemyTurn(player);
             if(p!=null && p.compareTo(e.position) != 0){
                 e.interact(board.getTile(p.getY(), p.getX()));

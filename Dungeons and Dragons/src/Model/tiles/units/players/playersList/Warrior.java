@@ -1,5 +1,6 @@
 package Model.tiles.units.players.playersList;
 
+import Model.tiles.units.Unit;
 import Model.tiles.units.enemies.Enemy;
 import Model.tiles.units.players.Player;
 import utilsGeneral.MessageCallBackToView;
@@ -19,8 +20,11 @@ public class Warrior extends Player {
         this.remainingCoolDown = 0;
     }
 
-    @Override
-    public void OnAbilityCast(List<Enemy> enemies) {
+    public int getExperience(){
+        return experience;
+    }
+
+    public void OnAbilityCast(List<Unit> enemies) {
 
         remainingCoolDown = abilityCoolDown;
 
@@ -28,7 +32,7 @@ public class Warrior extends Player {
         health.setCurrent(Math.min(health.getCurrent() + (10 * defense), health.getCapacity()));
 
         // Filter enemies within range < 3
-        List<Enemy> enemiesInRange = enemies.stream()
+        List<Unit> enemiesInRange = enemies.stream()
                 .filter(enemy -> position.distance(enemy.position) < 3)
                 .collect(Collectors.toList());
 
@@ -36,7 +40,7 @@ public class Warrior extends Player {
         if (!enemiesInRange.isEmpty()) {
             // Select a random enemy
             Random rand = new Random();
-            Enemy target = enemiesInRange.get(rand.nextInt(enemiesInRange.size()));
+            Unit target = enemiesInRange.get(rand.nextInt(enemiesInRange.size()));
 
             // Calculate damage as 10% of the warrior's health pool
             int damage = (int) (0.1 * health.getCapacity());
@@ -64,7 +68,7 @@ public class Warrior extends Player {
     }
 
     @Override
-    public void OnAbilityCastAttempt(List<Enemy> enemies) {
+    public void OnAbilityCastAttempt(List<Unit> enemies) {
         if (!isAbilityReady()) {
             messageCallBackToView.abilityErrorMessage("Ability is not ready yet!");
         } else {

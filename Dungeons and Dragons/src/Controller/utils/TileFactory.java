@@ -4,6 +4,7 @@ import Model.tiles.Empty;
 import Model.tiles.Tile;
 import Model.tiles.Wall;
 import Model.tiles.units.enemies.Enemy;
+import Model.tiles.units.enemies.enamiesList.Boss;
 import Model.tiles.units.enemies.enamiesList.Monster;
 import Model.tiles.units.enemies.enamiesList.Trap;
 import Model.tiles.units.players.playersList.Hunter;
@@ -40,9 +41,9 @@ public class TileFactory {
             new AbstractMap.SimpleEntry<>('b', () -> new Monster(0, 0, "Bear-Wright", 'b', 1000, 75, 30, 3, 250)),
             new AbstractMap.SimpleEntry<>('g', () -> new Monster(0, 0, "Giant-Wright", 'g', 1500, 100, 40, 3, 500)),
             new AbstractMap.SimpleEntry<>('w', () -> new Monster(0, 0, "White Walker", 'w', 2000, 150, 50, 3, 1000)),
-            new AbstractMap.SimpleEntry<>('M', () -> new Monster(0, 0, "The Mountain", 'M', 1000, 60, 25, 3, 500)),
-            new AbstractMap.SimpleEntry<>('C', () -> new Monster(0, 0, "Queen Cersei", 'C', 100, 10, 10, 3, 1000)),
-            new AbstractMap.SimpleEntry<>('K', () -> new Monster(0, 0, "Night’s King", 'K', 5000, 300, 150, 3, 5000)),
+            new AbstractMap.SimpleEntry<>('M', () -> new Boss(0, 0, "The Mountain", 'M', 1000, 60, 25, 6, 500,5)),
+            new AbstractMap.SimpleEntry<>('C', () -> new Boss(0, 0, "Queen Cersei", 'C', 100, 10, 10, 1, 1000,5)),
+            new AbstractMap.SimpleEntry<>('K', () -> new Boss(0, 0, "Night’s King", 'K', 5000, 300, 150, 8, 5000,3)),
             new AbstractMap.SimpleEntry<>('B', () -> new Trap(0, 0, "Bonus Trap", 'B', 1, 1, 1, 1, 5, 250)),
             new AbstractMap.SimpleEntry<>('Q', () -> new Trap(0, 0, "Queen’s Trap", 'Q', 250, 50, 10, 3, 7, 100)),
             new AbstractMap.SimpleEntry<>('D', () -> new Trap(0, 0, "Death Trap", 'D', 500, 100, 20, 5, 10, 250))

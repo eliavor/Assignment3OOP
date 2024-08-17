@@ -1,5 +1,6 @@
 package Model.tiles.units.players.playersList;
 
+import Model.tiles.units.Unit;
 import Model.tiles.units.enemies.Enemy;
 import Model.tiles.units.players.Player;
 import utilsGeneral.MessageCallBackToView;
@@ -18,19 +19,23 @@ public class Rogue extends Player {
         this.currentEnergy = 100;
     }
 
-    @Override
-    public void OnAbilityCast(List<Enemy> enemies) {
+
+    public void OnAbilityCast(List<Unit> enemies) {
         currentEnergy -= cost;
 
-        List<Enemy> enemiesInRange = enemies.stream()
+        List<Unit> enemiesInRange = enemies.stream()
                 .filter(enemy -> position.distance(enemy.position) < 2)
                 .collect(Collectors.toList());
 
-        for (Enemy enemy : enemiesInRange) {
+        for (Unit enemy : enemiesInRange) {
             // Deal damage to the enemy
             enemy.health.takeDamage(attack);
             messageCallBackToView.ShowBattleInfo(toDict(), enemy.toDict(), attack, 0);
         }
+    }
+
+    public int getExperience(){
+        return experience;
     }
 
     @Override
@@ -45,8 +50,8 @@ public class Rogue extends Player {
         currentEnergy = Math.min(currentEnergy + 10, 100);
     }
 
-    @Override
-    public void OnAbilityCastAttempt(List<Enemy> enemies) {
+
+    public void OnAbilityCastAttempt(List<Unit> enemies) {
         if (currentEnergy < cost) {
             messageCallBackToView.abilityErrorMessage("Ability is not ready yet!");
         } else {

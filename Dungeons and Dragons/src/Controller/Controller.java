@@ -4,6 +4,7 @@ import Controller.utils.InputHandler;
 import Controller.initializers.LevelInitializer;
 import Controller.utils.TileFactory;
 import Model.game.Game;
+import Model.tiles.units.Unit;
 import utilsGeneral.MessageCallBackModelToController;
 import utilsGeneral.MessageCallBackToController;
 import View.utils.View;
@@ -24,7 +25,7 @@ public class Controller {
     private Game game;
     private int playerID;
     private List<Tile> tiles;
-    private List<Enemy> enemies;
+    private List<Unit> enemies;
     private Player player;
 
 

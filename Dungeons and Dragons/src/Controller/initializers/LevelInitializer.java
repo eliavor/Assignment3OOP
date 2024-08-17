@@ -4,6 +4,7 @@ import Controller.utils.TileFactory;
 import Model.tiles.Empty;
 import Model.tiles.Tile;
 import Model.tiles.Wall;
+import Model.tiles.units.Unit;
 import Model.tiles.units.enemies.Enemy;
 import Model.tiles.units.players.Player;
 import Model.utils.Position;
@@ -23,7 +24,7 @@ public class LevelInitializer {
     private final String directoryPath;
 
     private List<Tile> tiles;
-    private List<Enemy> enemies;
+    private List<Unit> enemies;
     private Player player;
     private int playerID;
 
@@ -112,7 +113,7 @@ public class LevelInitializer {
         return tiles;
     }
 
-    public List<Enemy> GetEnenmyList() {
+    public List<Unit> GetEnenmyList() {
         return enemies;
     }
 

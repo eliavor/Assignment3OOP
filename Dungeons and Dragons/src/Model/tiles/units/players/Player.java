@@ -2,14 +2,13 @@ package Model.tiles.units.players;
 
 import Model.tiles.units.Unit;
 import Model.tiles.units.enemies.Enemy;
-import Model.utils.Position;
-import utilsGeneral.MessageCallBackToView;
+import Model.tiles.units.HeroicUnit;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
 
-public abstract class Player extends Unit {
+public abstract class Player extends Unit implements HeroicUnit {
 
     public static final char SYMBOL = '@';
 
@@ -96,7 +95,7 @@ public abstract class Player extends Unit {
 
     }
 
-    public abstract void OnAbilityCast(List<Enemy> enemies);
+    //public abstract void OnAbilityCast(List<Enemy> enemies);
 
     protected void UponLevelUp(){
         this.experience -= levelRequirement();
@@ -112,6 +111,6 @@ public abstract class Player extends Unit {
 
     public abstract void OnGameTick();
 
-    public abstract void OnAbilityCastAttempt(List<Enemy> enemies);
+    //public abstract void OnAbilityCastAttempt(List<Enemy> enemies);
 
 }

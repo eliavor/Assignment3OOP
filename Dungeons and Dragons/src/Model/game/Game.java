@@ -1,6 +1,7 @@
 package Model.game;
 
 import Model.tiles.Tile;
+import Model.tiles.units.Unit;
 import Model.tiles.units.enemies.Enemy;
 import Model.tiles.units.players.Player;
 import Model.utils.Position;
@@ -46,7 +47,7 @@ public class Game {
         messageCallBackModelToController.askNextLevel();
     }
 
-    public void nextLevel(List<Tile> tiles, List<Enemy> enemies, Player player) {
+    public void nextLevel(List<Tile> tiles, List<Unit> enemies, Player player) {
         this.player = player;
         level = new Level(tiles, enemies, player, messageCallBackToView);
         messageCallBackToView.ShowPlayerStats(player.toDict());

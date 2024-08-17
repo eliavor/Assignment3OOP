@@ -1,5 +1,6 @@
 package Model.tiles.units.players.playersList;
 
+import Model.tiles.units.Unit;
 import Model.tiles.units.enemies.Enemy;
 import Model.tiles.units.players.Player;
 
@@ -40,11 +41,11 @@ public class Hunter extends Player {
     }
 
     @Override
-    public void OnAbilityCastAttempt(List<Enemy> enemies) {
+    public void OnAbilityCastAttempt(List<Unit> enemies) {
         if (arrowCount == 0) {
             messageCallBackToView.abilityErrorMessage("Ability is not ready yet!");
         }
-        List<Enemy> enemyInRange = enemies.stream()
+        List<Unit> enemyInRange = enemies.stream()
                 .filter(enemy -> position.distance(enemy.position) < range)
                 .toList();
 
@@ -57,18 +58,23 @@ public class Hunter extends Player {
     }
 
 
-    @Override
-    public void OnAbilityCast(List<Enemy> enemyInRange) {
+    public int getExperience(){
+        return experience;
+    }
 
 
-            Enemy closest = enemyInRange.getFirst();
-            for (Enemy enemy : enemyInRange) {
+    public void OnAbilityCast(List<Unit> enemyInRange) {
+
+
+            Unit closest = enemyInRange.getFirst();
+            for (Unit enemy : enemyInRange) {
                 if (enemy.position.distance(this.position) < closest.position.distance(this.position)) {
                     closest = enemy;
                 }
             }
-            closest.health.takeDamage(attack );
-            messageCallBackToView.ShowBattleInfo(toDict(), closest.toDict(),attack, 0);
+            int def = closest.defend();
+            closest.health.takeDamage(attack - def );
+            messageCallBackToView.ShowBattleInfo(toDict(), closest.toDict(),attack, def);
             this.arrowCount--;
             if (!closest.isAlive()) {
                 addExperience(closest.getExperience());

@@ -73,6 +73,9 @@ public abstract class Unit extends Tile {
     public void visit(Wall W){
         //DO NOTHING
     }
+    public Position OnEnemyTurn(Player p){return null;}
+
+    public abstract int getExperience();
 
     public abstract Dictionary<String,String> toDict();
 

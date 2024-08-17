@@ -1,5 +1,6 @@
 package Model.tiles.units.players.playersList;
 
+import Model.tiles.units.Unit;
 import Model.tiles.units.enemies.Enemy;
 import Model.tiles.units.players.Player;
 import utilsGeneral.MessageCallBackToView;
@@ -27,18 +28,18 @@ public class Mage extends Player {
         this.abilityRange = abilityRange;
     }
 
-    @Override
-    public void OnAbilityCast(List<Enemy> enemies) {
+
+    public void OnAbilityCast(List<Unit> enemies) {
         currentMana -= manaCost;
         int hits = 0;
         Random rand = new Random();
 
-        List<Enemy> enemiesInRange = enemies.stream()
+        List<Unit> enemiesInRange = enemies.stream()
                 .filter(enemy -> position.distance(enemy.position) < abilityRange)
                 .collect(Collectors.toList());
 
         while (hits < hitCount && !enemiesInRange.isEmpty()) {
-            Enemy target = enemiesInRange.get(rand.nextInt(enemiesInRange.size()));
+            Unit target = enemiesInRange.get(rand.nextInt(enemiesInRange.size()));
             int damage = spellPower;
 
             // Deal damage to the selected enemy
@@ -46,11 +47,14 @@ public class Mage extends Player {
             messageCallBackToView.ShowBattleInfo(toDict(), target.toDict(), damage, 0);
             // Remove dead enemies from the list
             enemiesInRange = enemiesInRange.stream()
-                    .filter(Enemy::isAlive)
+                    .filter(Unit::isAlive)
                     .collect(Collectors.toList());
 
             hits++;
         }
+    }
+    public int getExperience(){
+        return experience;
     }
 
     @Override
@@ -66,8 +70,8 @@ public class Mage extends Player {
         currentMana = Math.min(currentMana + level, manaPool);
     }
 
-    @Override
-    public void OnAbilityCastAttempt(List<Enemy> enemies) {
+
+    public void OnAbilityCastAttempt(List<Unit> enemies) {
         if (currentMana < manaCost) {
             messageCallBackToView.abilityErrorMessage("Ability is not ready yet!");
         } else {
