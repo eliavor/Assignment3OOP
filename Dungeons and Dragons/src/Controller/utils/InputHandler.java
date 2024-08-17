@@ -28,7 +28,7 @@ public class InputHandler {
 
     public int handleUserFirstInput(){
         String userInput = sc.nextLine();
-        while (userInput.length() != 1 || userInput.charAt(0) >'6' || userInput.charAt(0) < '1'){
+        while (userInput.length() != 1 || userInput.charAt(0) >'7' || userInput.charAt(0) < '1'){
             userInput = sc.nextLine();
         }
         return Character.getNumericValue(userInput.charAt(0));

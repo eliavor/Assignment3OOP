@@ -6,6 +6,7 @@ import Model.tiles.Wall;
 import Model.tiles.units.enemies.Enemy;
 import Model.tiles.units.enemies.enamiesList.Monster;
 import Model.tiles.units.enemies.enamiesList.Trap;
+import Model.tiles.units.players.playersList.Hunter;
 import Model.tiles.units.players.playersList.Mage;
 import Model.tiles.units.players.Player;
 import Model.tiles.units.players.playersList.Rogue;
@@ -26,7 +27,8 @@ public class TileFactory {
             () -> new Mage(0, 0, "Melisandre", 100, 5, 1, 300, 30, 15, 5, 6),
             () -> new Mage(0, 0, "Thoros of Myr", 250, 25, 4, 150, 20, 20, 3, 4),
             () -> new Rogue(0, 0, "Arya Stark", 150, 40, 2, 20),
-            () -> new Rogue(0, 0, "Bronn", 250, 35, 3, 50)
+            () -> new Rogue(0, 0, "Bronn", 250, 35, 3, 50),
+            () -> new Hunter(0,0,"ygritte", 220,30,2,6,10)
 
     );
 
